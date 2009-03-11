@@ -1,0 +1,92 @@
+%h1 Flapjack
+%div#what
+  %h3 What
+  %p 
+    %em Flapjack 
+    is a scalable and distributed monitoring system. It natively talks the
+    Nagios plugin format, and can easily be scaled from 1 server to 1000.
+  %p 
+    %em Flapjack 
+    tries to adhere to the following tenets: 
+  %ul 
+    %li it should be simple to set up, configure, and maintain
+    %li it should easily scale from a single host to multiple
+    %li writing and sharing checks should be quick and obvious
+    
+%div#where
+  %h3 Where
+  %p
+    On&nbsp;
+    %a{:href => "http://github.com/auxesis/flapjack/tree/master"}> GitHub
+    \.
+
+%div#how
+  %h3 How
+  %p 
+    %em Flapjack 
+    consists of several components that&nbsp;
+    %a{:href => "http://en.wikipedia.org/wiki/Unix_philosophy"}> do one thing and do it well
+    \.
+    %p 
+      A picture tells a thousand words: 
+      %pre#architecture
+        :plain 
+                -------------                  ------------
+          | populator |---          -----| notifier |
+          -------------  |          |    ------------
+                         |          |
+                        --------------
+                        | beanstalkd |
+                        --------------
+                              |
+             -----------------------------------
+             |                |                |
+          ----------      ----------       ----------
+          | worker |      | worker |       | worker |
+          ----------      ----------       ----------
+
+    %p 
+      The populator grabs checks out of a bunch of different sources and inserts
+      them into a
+      %a{:href => "http://xph.us/software/beanstalkd/"} Beanstalkd
+      jobs queue. 
+    %p 
+      Workers then:
+      %ol
+        %li pop a check off the jobs queue
+        %li do the check
+        %li put the result onto the results queue
+        %li put the job back onto the jobs queue
+
+
+
+%div#who
+  %h3 Who
+  %p
+    %em Flapjack 
+    is written by&nbsp;
+    %a{:href => "http://holmwood.id.au/~lindsay/"}> Lindsay Holmwood 
+    \.
+
+  %p
+    Logo derived from
+    %em
+      %a{:href => "http://www.flickr.com/photos/ewedistrict/23110406/"} Pancake
+    by Brandon Martin-Anderson, and is 
+    %a{:href => "http://creativecommons.org/licenses/by-sa/2.0/deed.en"} CC Attribution-Share Alike 2.0 Generic
+    licenced.
+
+%div#friends
+  %h3 Friends of Flapjack
+  %ul
+    %li
+      %a{:href => "http://reductivelabs.com/products/puppet/"}> Puppet
+      , configuration management & automated infrastructure.
+    %li
+      %a{:href => "http://collectd.org/"}> collectd
+      , the lightweight statistics collection daemon.
+
+
+
+
+

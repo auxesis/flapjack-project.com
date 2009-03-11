@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Flapjack | <%= @page.title %></title>
+    <link type="text/css" media="all" charset="utf-8" rel="Stylesheet" href="/stylesheets/master.css?031105151592" />
+  </head>
+  <body>
+    <div id="logo">
+      <img src="/images/flapjack.png" alt="http://www.flickr.com/photos/ewedistrict/23110406/"/>
+    </div>
+    <div id="content">
+      <%= @page.content %>
+    </div>
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+        var pageTracker = _gat._getTracker("UA-388962-5");
+        pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
+  </body>
+</html>
