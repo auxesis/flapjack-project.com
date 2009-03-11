@@ -1,0 +1,71 @@
+* { 
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Baskerville, Georgia, serif;
+  font-size: 1.4em;
+  background-color: #040000;
+}
+
+div#content {
+  width: 800px;
+  margin: auto;
+  padding: 2em;
+  color: white;
+  line-height: 1.4em;
+}
+
+div#logo {
+  float: right;
+}
+
+p {
+  margin: 0.7em 0;
+}
+
+li {
+  margin: 0.2em 0 0.2em 1em;
+}
+
+ul {
+  list-style-type: circle;
+  margin-left: 1em;
+}
+
+ol {
+  list-style-type: decimal;
+  margin-left: 1em;
+}
+
+h1, h2, h3 {
+  margin: 1.3em 0 -0.3em;
+}
+
+pre#architecture {
+  font-size: 0.9em;
+  line-height: 1em;
+  margin-bottom: 1em;
+}
+
+a { 
+  color: #4D88CF;
+  text-decoration: none;
+}
+
+/*
+body {
+  background-image: url(/images/flapjack.png);
+  background-repeat: no-repeat;
+  background-position: top right;
+}
+*/
+
+div#friends ul {
+  margin-top: 1em;
+}
