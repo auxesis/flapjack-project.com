@@ -8,8 +8,8 @@ body {
 }
 
 body {
-  font-family: Baskerville, Georgia, serif;
-  font-size: 1.4em;
+  font-family: Georgia, serif;
+  font-size: 1.2em;
   background-color: #040000;
 }
 
@@ -54,7 +54,7 @@ pre#architecture {
 }
 
 a { 
-  color: #4D88CF;
+  color: #a9c6e8;
   text-decoration: none;
 }
 
@@ -68,4 +68,28 @@ body {
 
 div#friends ul {
   margin-top: 1em;
+}
+
+blockquote.commands pre {
+  background-color: #fffeff;
+  color: #040000;
+  padding: 0.8em;
+}
+
+/* code { font-size: 90%; } */
+
+div#running li {
+  margin: 1.5em 0.5em;
+  list-style-type: square;
+  padding-left: 0.33em;
+}
+
+img.architecture {
+  margin: auto;
+  display: block;
+  margin-bottom: -1em;
+}
+
+div#what {
+  padding-top: 1em;
 }
