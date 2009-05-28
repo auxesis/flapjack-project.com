@@ -48,6 +48,9 @@ h1, h2, h3, h4 {
 }
 
 
+blockquote {
+  margin: 0 1.3em;
+}
 
 pre {
   font-size: 0.9em;
