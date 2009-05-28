@@ -1,7 +1,6 @@
 %h1 Flapjack
 %h4.tagline (the delicious monitoring system) 
 %div#what
-  %h3 What
   %p 
     %em Flapjack 
     is a scalable and distributed monitoring system. It natively talks the
@@ -13,62 +12,188 @@
     %li it should be simple to set up, configure, and maintain
     %li it should easily scale from a single host to multiple
     %li writing and sharing checks should be quick and obvious
-    
-%div#where
-  %h3 Where
-  %p
-    The core of the project can be found on&nbsp;
-    %a{:href => "http://github.com/auxesis/flapjack/tree/master"}> GitHub
-    \.
-  %p
-    There's an admin interface creatively named&nbsp;
-    %a{:href => "http://github.com/auxesis/flapjack-admin/tree/master"}> flapjack-admin
-    \. You can check out a
-    %a{:href => "http://demo-admin.flapjack-project.com/"} demo
-    of the interface.
 
-%div#how
-  %h3 How
+%div#installation
+  %h2 Installing
   %p 
+    You'll want to read the detailed install instruction on the&nbsp;
+    %a{:href => "http://github.com/auxesis/flapjack/tree/master#readme"}> GitHub page
+    \. They list the required dependencies, and cover installing on 
+    Ubuntu Hardy &amp; by hand.
+  %p
+    Once you have all the dependencies set up, installation is simply:
+    %blockquote.commands
+      %pre
+        :preserve
+          $ sudo gem sources -a http://gems.github.com/
+          $ sudo gem install auxesis-flapjack
+          $ sudo install-flapjack-systemwide
+  %p
+    We want to provide native packages for 
+    %em Flapjack 
+    (.deb, .rpm). If you'd like to contribute please let us know!
+
+%div#running
+  %h2 Running
+  %p 
+    Firstly, you'll want to make sure 
+    %code beanstalkd 
+    is running: 
+    %blockquote.commands
+      %pre 
+        $ /etc/init.d/beanstalkd start
+  %p
     %em Flapjack 
     consists of several components that&nbsp;
     %a{:href => "http://en.wikipedia.org/wiki/Unix_philosophy"}> do one thing and do it well
-    \.
-    %p 
-      A picture tells a thousand words: 
-      %pre#architecture
-        :plain 
-                -------------                  ------------
-          | populator |---          -----| notifier |
-          -------------  |          |    ------------
-                         |          |
-                        --------------
-                        | beanstalkd |
-                        --------------
-                              |
-             -----------------------------------
-             |                |                |
-          ----------      ----------       ----------
-          | worker |      | worker |       | worker |
-          ----------      ----------       ----------
+    \:
+  %img{:src => "images/flapjack-architecture.png", :class => 'architecture'}
 
-    %p 
-      The populator grabs checks out of a bunch of different sources and inserts
-      them into a
-      %a{:href => "http://xph.us/software/beanstalkd/"} Beanstalkd
-      jobs queue. 
-    %p 
-      Workers then:
-      %ol
-        %li pop a check off the jobs queue
-        %li do the check
-        %li put the result onto the results queue
-        %li put the job back onto the jobs queue
+  %ul
+    %li
+      %p 
+        %code flapjack-worker
+        executes the checks and reports back results. 
+      %p 
+        You can use 
+        %code flapjack-worker-manager
+        to start a cluster of workers (5 by default):
+        %blockquote.commands
+          %pre 
+            $ flapjack-worker-manager start
+      %p 
+        %code flapjack-worker-manager 
+        can be called multiple times to start more workers, for 
+        instance:
+        %blockquote.commands
+          %pre 
+            :preserve
+              $ flapjack-worker-manager start --workers=10
+              $ flapjack-worker-manager start --workers=15
+      %p 
+        will start 25 workers. 
+      %p 
+        Calling 
+        %code flapjack-worker-manager
+        with 
+        %code stop 
+        %blockquote.commands
+          %pre 
+            :preserve
+              $ flapjack-worker-manager stop
+      %p 
+        will shutdown all running workers:
+      %p 
+        If you want to run a 
+        %code flapjack-worker
+        interactively, just run: 
+        %blockquote.commands
+          %pre 
+            :preserve
+              $ flapjack-worker
+              ^C
+      %p      
+        To find out what options can be passed to the worker, run: 
+        %blockquote.commands
+          %pre 
+            :preserve
+              $ flapjack-worker --help
+
+    %li
+      %p 
+        %code flapjack-notifier
+        notifies people if the check results are bad.
+      %p 
+        Use 
+        %code flapjack-notifier-manager 
+        to start and stop 
+        %code flapjack-notifier
+        as a daemon. 
+        %blockquote.commands
+          %pre 
+            $ flapjack-notifier-manager start
+      %p 
+        Right now you can only run one 
+        %code flapjack-notifier
+        as a daemon at a time. 
+      %p 
+        Like&nbsp; 
+        %code> flapjack-worker
+        , you can run 
+        %code flapjack-notifier
+        interactively:
+        %blockquote.commands
+          %pre 
+            :preserve
+              $ flapjack-notifier
+              ^C
+      %p      
+        You can also get a list of options to pass to the notifier: 
+        %blockquote.commands
+          %pre 
+            :preserve
+              $ flapjack-notifier --help
+        
+%div#administering
+  %h2 Administering
+  %p
+    Grab the 
+    %a{:href => "http://github.com/auxesis/flapjack-admin/tree/master#readme"} flapjack-admin 
+    web interface to start configuring checks, then use the 
+    %code flapjack-populator
+    included with 
+    %code flapjack-admin
+    to start running the checks:
+    %blockquote.commands
+      %pre 
+        :preserve
+          $ cd path/to/flapjack/admin
+          $ bin/flapjack-populator
+  %p
+    When you ran 
+    %code install-flapjack-systemwide 
+    during the install, init scripts were placed in&nbsp;
+    %code> /etc/init.d
+    \. Additionally, if you run Ubuntu or Debian, they were
+    set to start on boot.
+  %p
+    Each init script has a corresponding control file in 
+    %code /etc/default/
+    that can be used to set default options when starting &amp;
+    stopping daemons. 
+
+  %p
+    You can use these to start up the different parts of 
+    %em Flapjack
+    depending on what role the system should play. 
+    
+  %p
+    For instance, you might want to run a worker cluster on one 
+    machine and the notifier on another. This can be a great 
+    way of distributing the load when you have lots of checks.
+  %p 
+    You can run worker clusters across many machines too, providing
+    failover if one of your cluster goes down. This also works for 
+    the notifier.
 
 
+
+%div#developing
+  %h2 Developing
+  %p
+    Flapjack's code is maintained in two repositories on GitHub: 
+    %ul 
+      %li
+        %a{:href => "http://github.com/auxesis/flapjack/tree/master"} flapjack
+      %li 
+        %a{:href => "http://github.com/auxesis/flapjack-admin/tree/master"} flapjack-admin
+  %p
+    You can check out a
+    %a{:href => "http://demo-admin.flapjack-project.com/"} demo
+    of the admin interface.
 
 %div#who
-  %h3 Who
+  %h2 Who's reponsibile?
   %p
     %em Flapjack 
     is written by&nbsp;
@@ -84,7 +209,7 @@
     licenced.
 
 %div#friends
-  %h3 Friends of Flapjack
+  %h2 Friends of Flapjack
   %ul
     %li
       %a{:href => "http://reductivelabs.com/products/puppet/"}> Puppet
