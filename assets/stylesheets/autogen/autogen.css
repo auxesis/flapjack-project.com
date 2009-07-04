@@ -3,6 +3,7 @@ div.generated pre {
   background-color: #fffeff;                                                            
   color: #040000;                                                                       
   padding: 0.8em;
+  margin: 0 1.3em;
 }
 
 div.generated pre code {
