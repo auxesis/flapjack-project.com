@@ -1,23 +1,4 @@
 %div#installation
-  %h2 Installing
-  %p 
-    You'll want to read the detailed install instruction on the&nbsp;
-    %a{:href => "http://github.com/auxesis/flapjack/tree/master#readme"}> GitHub page
-    \. They list the required dependencies, and cover installing on 
-    Ubuntu Hardy &amp; by hand.
-  %p
-    Once you have all the dependencies set up, installation is simply:
-    %blockquote.commands
-      %pre
-        :preserve
-          $ sudo gem sources -a http://gems.github.com/
-          $ sudo gem install auxesis-flapjack
-          $ sudo install-flapjack-systemwide
-  %p
-    We want to provide native packages for 
-    %em Flapjack 
-    (.deb, .rpm). If you'd like to contribute please let us know!
-
   %div.generated#install
     = generate_docs_from_source('install')
 
