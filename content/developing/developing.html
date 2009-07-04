@@ -1,1 +1,19 @@
-Hi, I'm a new page!
+%div#developing
+  %h2 Source code
+  %p
+    Flapjack's code is maintained in two repositories on GitHub:
+    %ul
+      %li
+        %a{:href => "http://github.com/auxesis/flapjack/tree/master"}> flapjack
+        , the core of the monitoring system.
+      %li
+        %a{:href => "http://github.com/auxesis/flapjack-admin/tree/master"}> flapjack-admin	
+        , the admin interface.
+ 
+  %p 
+    Flapjack open source, released under the
+    = link_to "MIT Licence", "http://en.wikipedia.org/wiki/MIT_License"
+
+  %div.generated#developing
+    = generate_docs_from_source('developing')
+
