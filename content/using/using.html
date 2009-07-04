@@ -143,33 +143,34 @@
       again.
   
   %div#distributing
-    %h2 Distributing
-  %p
-    When you ran 
-    %code install-flapjack-systemwide 
-    during the install, init scripts were placed in&nbsp;
-    %code> /etc/init.d
-    \. Additionally, if you run Ubuntu or Debian, they were
-    set to start on boot.
-  %p
-    Each init script has a corresponding control file in 
-    %code /etc/default/
-    that can be used to set default options when starting &amp;
-    stopping daemons. 
-
-  %p
-    You can use these to start up the different parts of 
-    %em Flapjack
-    depending on what role the system should play. 
-    
-  %p
-    For instance, you might want to run a worker cluster on one 
-    machine and the notifier on another. This can be a great 
-    way of distributing the load when you have lots of checks.
-  %p 
-    You can run worker clusters across many machines too, providing
-    failover if one of your clusters goes down. This also works for 
-    the notifier.
+    %h2.distributing.component
+      %span Distributing
+    %p
+      When you ran 
+      %code install-flapjack-systemwide 
+      during the install, init scripts were placed in&nbsp;
+      %code> /etc/init.d
+      \. Additionally, if you run Ubuntu or Debian, they were
+      set to start on boot.
+    %p
+      Each init script has a corresponding control file in 
+      %code /etc/default/
+      that can be used to set default options when starting &amp;
+      stopping daemons. 
+  
+    %p
+      You can use these to start up the different parts of 
+      %em Flapjack
+      depending on what role the system should play. 
+      
+    %p
+      For instance, you might want to run a worker cluster on one 
+      machine and the notifier on another. This can be a great 
+      way of distributing the load when you have lots of checks.
+    %p 
+      You can run worker clusters across many machines too, providing
+      failover if one of your clusters goes down. This also works for 
+      the notifier.
 
 
 
