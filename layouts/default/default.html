@@ -12,7 +12,7 @@
       <div id="nav">
         <% home = @pages.find {|p| p.path == '/'} %>
         <%= link_to home.title, home.path %>
-        <% home.children.sort {|a,b| (a.order||0) <=> (b.order||0)}.each do |page| %>
+        <% home.children.sort {|a,b| a.order.to_i <=> b.order.to_i}.each do |page| %>
           <%= link_to page.title, page.path %>
         <% end %>
       </div>
