@@ -1,0 +1,11 @@
+
+div.generated pre {
+  background-color: #fffeff;                                                            
+  color: #040000;                                                                       
+  padding: 0.8em;
+}
+
+div.generated pre code {
+  background-color: #fffeff;
+  overflow: auto;
+}
