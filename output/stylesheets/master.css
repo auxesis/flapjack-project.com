@@ -16,13 +16,33 @@ body {
 div#content {
   width: 800px;
   margin: auto;
-  padding: 2em;
   color: white;
   line-height: 1.4em;
 }
 
 div#logo {
   float: right;
+}
+
+div#menu {
+  width: 800px;
+  color: white;
+  margin: auto;
+  padding: 0.5em 0;
+  text-align: center;
+  border-bottom: 1px solid #888a85;
+}
+
+div#nav {
+  margin: 0.6em 0 0;
+}
+
+div#nav a {
+  color: white;
+  background-color: #2b2c2a;
+  padding: 3px;
+  font-size: 1.3em;
+  margin: 0 0.15em;
 }
 
 p {
@@ -93,6 +113,24 @@ img.architecture {
   margin-bottom: -1em;
 }
 
-div#what {
+div#what, div#usage {
   padding-top: 1em;
 }
+
+/* usage page */
+h2.component span {
+  background-color: #2b2c2a;
+}
+
+h2.flapjack-worker {
+  color: #fedbaa;
+}
+
+h2.flapjack-notifier {
+  color: #c8d0ff;
+}
+
+h2.flapjack-admin {
+  color: #f3c8ff;
+}
+
