@@ -1,0 +1,176 @@
+%h1 Using Flapjack
+%div#usage
+  %p
+    %em Flapjack 
+    consists of several components that&nbsp;
+    %a{:href => "http://en.wikipedia.org/wiki/Unix_philosophy"}> do one thing and do it well
+    \:
+  %img{:src => "/images/flapjack-architecture.png", :class => 'architecture', :alt => 'architecture diagram'}
+  %ul
+    %li
+      %code flapjack-admin
+      lets you configure checks through a web interface.
+    %li
+      %code flapjack-notifier
+      notifies people if the check results are bad.
+    %li
+      %code flapjack-worker
+      executes the checks and reports back results. 
+    %li 
+      %code beanstalkd
+      is a work queue used to distribute checks and results.
+
+  %div#flapjack-worker
+    %h2.flapjack-worker.component
+      %span flapjack-worker
+    %p 
+      You can use 
+      %code flapjack-worker-manager
+      to start a cluster of workers (5 by default):
+      %blockquote.commands
+        %pre 
+          $ flapjack-worker-manager start
+    %p 
+      %code flapjack-worker-manager 
+      can be called multiple times to start more workers, for 
+      instance:
+      %blockquote.commands
+        %pre 
+          :preserve
+            $ flapjack-worker-manager start --workers=10
+            $ flapjack-worker-manager start --workers=15
+    %p 
+      will start 25 workers. 
+    %p 
+      Calling 
+      %code flapjack-worker-manager
+      with 
+      %code stop 
+      %blockquote.commands
+        %pre 
+          :preserve
+            $ flapjack-worker-manager stop
+    %p 
+      will shutdown all running workers.
+    %p 
+      If you want to run a 
+      %code flapjack-worker
+      interactively, just run: 
+      %blockquote.commands
+        %pre 
+          :preserve
+            $ flapjack-worker
+            ^C
+    %p
+      You can use this to see what's going on behind the scenes. The 
+      worker manager is just spawning multiple copies of
+      %code flapjack-worker.
+    %p      
+      To find out what options can be passed to the worker, run: 
+      %blockquote.commands
+        %pre 
+          :preserve
+            $ flapjack-worker --help
+
+  %div#flapjack-notifier
+    %h2.flapjack-notifier.component
+      %span flapjack-notifier
+    %p 
+      Use 
+      %code flapjack-notifier-manager 
+      to start and stop 
+      %code flapjack-notifier
+      as a daemon. 
+      %blockquote.commands
+        %pre 
+          $ flapjack-notifier-manager start
+    %p 
+      Right now you can only run one 
+      %code flapjack-notifier
+      as a daemon at a time. 
+    %p 
+      Like&nbsp; 
+      %code> flapjack-worker
+      , you can run 
+      %code flapjack-notifier
+      interactively:
+      %blockquote.commands
+        %pre 
+          :preserve
+            $ flapjack-notifier
+            ^C
+    %p      
+      You can also get a list of options to pass to the notifier: 
+      %blockquote.commands
+        %pre 
+          :preserve
+            $ flapjack-notifier --help
+        
+  %div#flapjack-admin
+    %h2.flapjack-admin.component
+      %span flapjack-admin
+    %p
+      Grab the 
+      %a{:href => "http://github.com/auxesis/flapjack-admin/tree/master#readme"} flapjack-admin 
+      web interface to start configuring checks, then use the 
+      %code flapjack-populator
+      included with 
+      %code flapjack-admin
+      to start running the checks:
+      %blockquote.commands
+        %pre 
+          :preserve
+            $ cd path/to/flapjack-admin
+            $ bin/flapjack-populator
+    %p
+      This will take the checks you set up in 
+      %code flapjack-admin
+      and turn them into jobs on the 
+      %code beanstalkd
+      work queue.
+    %p 
+      Provided the workers are running, they will start running the new
+      checks.
+    %p 
+      If you have existing checks in the 
+      %code beanstalkd
+      work queue, you need to restart it before running the populator 
+      again. As 
+      %code beanstalkd 
+      is an in-memory work queue, the restart will wipe all existing
+      jobs, leaving a clean slate to run the
+      %code flapjack-populator
+      again.
+  
+  %div#distributing
+    %h2 Distributing
+  %p
+    When you ran 
+    %code install-flapjack-systemwide 
+    during the install, init scripts were placed in&nbsp;
+    %code> /etc/init.d
+    \. Additionally, if you run Ubuntu or Debian, they were
+    set to start on boot.
+  %p
+    Each init script has a corresponding control file in 
+    %code /etc/default/
+    that can be used to set default options when starting &amp;
+    stopping daemons. 
+
+  %p
+    You can use these to start up the different parts of 
+    %em Flapjack
+    depending on what role the system should play. 
+    
+  %p
+    For instance, you might want to run a worker cluster on one 
+    machine and the notifier on another. This can be a great 
+    way of distributing the load when you have lots of checks.
+  %p 
+    You can run worker clusters across many machines too, providing
+    failover if one of your clusters goes down. This also works for 
+    the notifier.
+
+
+
+
