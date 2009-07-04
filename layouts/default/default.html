@@ -5,8 +5,17 @@
     <link type="text/css" media="all" charset="utf-8" rel="Stylesheet" href="/stylesheets/master.css?031105151592" />
   </head>
   <body>
-    <div id="logo">
-      <img src="/images/flapjack.png" alt="http://www.flickr.com/photos/ewedistrict/23110406/"/>
+    <div id="menu">
+      <div id="mini-logo">
+        <img src="/images/flapjack-small.png" alt="http://www.flickr.com/photos/ewedistrict/23110406/"/>
+      </div>
+      <div id="nav">
+        <% home = @pages.find {|p| p.path == '/'} %>
+        <%= link_to home.title, home.path %>
+        <% home.children.sort {|a,b| (a.order||0) <=> (b.order||0)}.each do |page| %>
+          <%= link_to page.title, page.path %>
+        <% end %>
+      </div>
     </div>
     <div id="content">
       <%= @page.content %>
