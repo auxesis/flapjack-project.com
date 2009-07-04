@@ -4,8 +4,14 @@
 include Nanoc::Helpers::LinkTo
 
 def generate_docs_from_source(name)
-  doc_path = File.join(@config[:flapjack_src], 'doc')
+  if ENV['FLAPJACK_SOURCE']
+    doc_path = File.join(ENV['FLAPJACK_SOURCE'], 'doc')
+  else
+    doc_path = File.join(@config[:flapjack_src], 'doc')
+  end
+
   filename = File.join(doc_path, "#{name.upcase}.md")
+  
   if File.exists?(filename)
     output = `rdiscount #{filename}`
     Haml::Helpers::find_and_preserve(output, ["pre"])
