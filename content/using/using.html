@@ -105,6 +105,9 @@
         %pre 
           :preserve
             $ flapjack-notifier --help
+  %div.generated#configuring
+    = generate_docs_from_source('configuring')
+  
         
   %div#flapjack-admin
     %h2.flapjack-admin.component
@@ -141,7 +144,7 @@
       jobs, leaving a clean slate to run the
       %code flapjack-populator
       again.
-  
+      
   %div#distributing
     %h2.distributing.component
       %span Distributing
