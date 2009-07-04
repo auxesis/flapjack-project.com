@@ -1,5 +1,7 @@
-%h1 Flapjack
-%h4.tagline (the delicious monitoring system) 
+%div#logo 
+  %img{:src => "/images/flapjack.png", :alt => "http://www.flickr.com/photos/ewedistrict/23110406/"}
+-#%h1 Flapjack
+-#%h4.tagline (the delicious monitoring system) 
 %div#what
   %p 
     %em Flapjack 
@@ -66,44 +68,6 @@
         %blockquote.commands
           %pre 
             $ flapjack-worker-manager start
-      %p 
-        %code flapjack-worker-manager 
-        can be called multiple times to start more workers, for 
-        instance:
-        %blockquote.commands
-          %pre 
-            :preserve
-              $ flapjack-worker-manager start --workers=10
-              $ flapjack-worker-manager start --workers=15
-      %p 
-        will start 25 workers. 
-      %p 
-        Calling 
-        %code flapjack-worker-manager
-        with 
-        %code stop 
-        %blockquote.commands
-          %pre 
-            :preserve
-              $ flapjack-worker-manager stop
-      %p 
-        will shutdown all running workers.
-      %p 
-        If you want to run a 
-        %code flapjack-worker
-        interactively, just run: 
-        %blockquote.commands
-          %pre 
-            :preserve
-              $ flapjack-worker
-              ^C
-      %p      
-        To find out what options can be passed to the worker, run: 
-        %blockquote.commands
-          %pre 
-            :preserve
-              $ flapjack-worker --help
-
     %li
       %p 
         %code flapjack-notifier
@@ -117,27 +81,6 @@
         %blockquote.commands
           %pre 
             $ flapjack-notifier-manager start
-      %p 
-        Right now you can only run one 
-        %code flapjack-notifier
-        as a daemon at a time. 
-      %p 
-        Like&nbsp; 
-        %code> flapjack-worker
-        , you can run 
-        %code flapjack-notifier
-        interactively:
-        %blockquote.commands
-          %pre 
-            :preserve
-              $ flapjack-notifier
-              ^C
-      %p      
-        You can also get a list of options to pass to the notifier: 
-        %blockquote.commands
-          %pre 
-            :preserve
-              $ flapjack-notifier --help
         
 %div#administering
   %h2 Administering
@@ -152,36 +95,8 @@
     %blockquote.commands
       %pre 
         :preserve
-          $ cd path/to/flapjack/admin
+          $ cd path/to/flapjack-admin
           $ bin/flapjack-populator
-  %p
-    When you ran 
-    %code install-flapjack-systemwide 
-    during the install, init scripts were placed in&nbsp;
-    %code> /etc/init.d
-    \. Additionally, if you run Ubuntu or Debian, they were
-    set to start on boot.
-  %p
-    Each init script has a corresponding control file in 
-    %code /etc/default/
-    that can be used to set default options when starting &amp;
-    stopping daemons. 
-
-  %p
-    You can use these to start up the different parts of 
-    %em Flapjack
-    depending on what role the system should play. 
-    
-  %p
-    For instance, you might want to run a worker cluster on one 
-    machine and the notifier on another. This can be a great 
-    way of distributing the load when you have lots of checks.
-  %p 
-    You can run worker clusters across many machines too, providing
-    failover if one of your cluster goes down. This also works for 
-    the notifier.
-
-
 
 %div#developing
   %h2 Developing
@@ -218,6 +133,10 @@
     %li
       %a{:href => "http://collectd.org/"}> collectd
       , the lightweight statistics collection daemon.
+    %li
+      %a{:href => "http://auxesis.github.com/cucumber-nagios/"}> cucumber-nagios
+      , lets you describe how a website should work in plain text, and outputs whether it does in
+      the Nagios plugin format.
 
 
 
