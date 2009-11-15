@@ -20,6 +20,24 @@
     %a{:href => "http://demo-admin.flapjack-project.com/"} demo
     of the admin interface.
 
+  %p.notice
+    %img{:src => "images/important.png", :class => 'important', :alt => 'important notice emblem'}
+
+    Flapjack is currently under heavy development. Please have a
+    play, but be aware there will be 
+    %a{:href=>"http://github.com/auxesis/flapjack/issues"}bugs!
+
+  %p
+    Slides from 
+    %a{:href=>"http://devopsdays.org/"} Devopsdays 2009
+    presentation introducing Flapjack:
+    %div{"margin-top" => "1em"}
+      %object{:width=>"425", :height=>"355"}
+        %param{:name=>"movie", :value => "http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=141-joined-091105162106-phpapp01&stripped_title=flapjack-rethinking-monitoring-for-the-cloud"}
+        %param{:name=>"allowFullScreen", :value=> true}
+        %param{:name=>"allowScriptAccess", :value=>"always"}
+        %embed{:src=>"http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=141-joined-091105162106-phpapp01&stripped_title=flapjack-rethinking-monitoring-for-the-cloud", :type => "application/x-shockwave-flash", :allowscriptaccess=>"always", :allowfullscreen=>"true", :width=>"425", :height=>"355"}
+
 %div#installation
   %h2 Installing
   %p 
