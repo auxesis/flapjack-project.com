@@ -122,6 +122,23 @@ div#what, div#usage {
   padding-top: 1em;
 }
 
+p.notice {
+  background-color: #F6FFA6;
+  color: black;
+  padding: 1em;
+  width: 550px;
+}
+
+p.notice a {
+  color: #32567D;
+}
+
+img.important {
+  display: block;
+  float: left;
+  margin-right: 1em;
+}
+
 /* usage page */
 h2.component span {
   background-color: #2b2c2a;
