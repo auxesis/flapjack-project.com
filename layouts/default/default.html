@@ -13,9 +13,9 @@
       <div id="nav">
         <% home = @pages.find {|p| p.path == '/'} %>
         <%= link_to home.title, home.path %>
-        <% home.children.sort {|a,b| a.order.to_i <=> b.order.to_i}.each do |page| %>
-          <%= link_to page.title, page.path %>
-        <% end %>
+        <%= link_to "Installing", "http://wiki.flapjack-project.com/installation_guides" %>
+        <%= link_to "Using", "http://wiki.flapjack-project.com/usage_guides" %>
+        <%= link_to "Developing", "http://wiki.flapjack-project.com/development_guides" %>
       </div>
     </div>
     <div id="content">
