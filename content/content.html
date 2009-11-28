@@ -37,11 +37,12 @@
         %param{:name=>"allowScriptAccess", :value=>"always"}
         %embed{:src=>"http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=141-joined-091105162106-phpapp01&stripped_title=flapjack-rethinking-monitoring-for-the-cloud", :type => "application/x-shockwave-flash", :allowscriptaccess=>"always", :allowfullscreen=>"true", :width=>"425", :height=>"355"}
 
+
 %div#installation
   %h2 Installing
   %p 
     You'll want to read the detailed&nbsp;
-    %a{:href => "/installing.html"}> install instructions
+    %a{:href => "http://wiki.flapjack-project.com/installation_guides"}> install instructions
     \. They list the required dependencies, and cover installing on 
     Ubuntu Hardy &amp; by hand.
   %p
@@ -49,23 +50,16 @@
     %blockquote.commands
       %pre
         :preserve
-          $ sudo gem sources -a http://gems.github.com/
-          $ sudo gem install auxesis-flapjack
+          $ sudo gem sources -a http://gemcutter.com/
+          $ sudo gem install flapjack
           $ sudo install-flapjack-systemwide
   %p
-    We want to provide native packages for 
-    %em Flapjack 
-    (.deb, .rpm, .ebuild). If you'd like to contribute packages, please do so!
+    Native packages for Debian/Ubuntu, Red Hat/CentOS, and OpenBSD are in the works. 
+    If you'd like to contribute packages for other systems, please check out the 
+    %a{:href=>"http://wiki.flapjack-project.com/packaging_guide"} packaging guide!
 
 %div#running
-  %h2 Using
-  %p 
-    Firstly, you'll want to make sure 
-    %code beanstalkd 
-    is running: 
-    %blockquote.commands
-      %pre 
-        $ /etc/init.d/beanstalkd start
+  %h2 Architecture
   %p
     %em Flapjack 
     consists of several components that&nbsp;
@@ -75,29 +69,33 @@
 
   %ul
     %li
-      %p 
-        %code flapjack-worker
-        executes the checks and reports back results. 
-      %p 
-        You can use 
-        %code flapjack-worker-manager
-        to start a cluster of workers (5 by default):
-        %blockquote.commands
-          %pre 
-            $ flapjack-worker-manager start
+      %code flapjack-worker
+      executes the checks and reports back results. 
     %li
-      %p 
-        %code flapjack-notifier
-        notifies people if the check results are bad.
-      %p 
-        Use 
-        %code flapjack-notifier-manager 
-        to start and stop 
-        %code flapjack-notifier
-        as a daemon. 
-        %blockquote.commands
-          %pre 
-            $ flapjack-notifier-manager start
+      %code flapjack-notifier
+      notifies people if the check results are bad.
+    %li 
+      %code flapjack-admin
+      lets you configure checks through a web interface.
+    %li 
+      %code beanstalkd 
+      is a work queue used to distribute checks and results.
+    %li 
+      %code CouchDB
+      is a document-oriented database that checks and events are stored in.
+
+  %p 
+    Each component is loosely coupled, which makes swapping out one part of the 
+    system for another very easy. Flapjack uses well defined and tested APIs 
+    between the components to guarantee consistency.
+  %p 
+    This also makes it very easy to extend Flapjack by writing custom admin
+    interfaces or check persistence backends. 
+  %p 
+    Find out more about 
+    %a{:href=>"http://wiki.flapjack-project.com/architecture"} Flapjack's architecture.
+
+        
         
 %div#administering
   %h2 Administering
@@ -115,15 +113,24 @@
           $ cd path/to/flapjack-admin
           $ bin/flapjack-populator
 
-%div#developing
-  %h2 Developing
+%div#help
+  %h2 Getting help
   %p
-    Flapjack's code is maintained in two repositories on GitHub: 
-    %ul 
-      %li
-        %a{:href => "http://github.com/auxesis/flapjack/tree/master"} flapjack
-      %li 
-        %a{:href => "http://github.com/auxesis/flapjack-admin/tree/master"} flapjack-admin
+    Check out the
+    %a{:href=>"http://wiki.flapjack-project.com"} wiki
+    for extended documentation on installing, using, packaging, and developing Flapjack.
+
+  %div#mailinglist
+    %img{ :src => "http://groups.google.com/intl/en/images/logos/groups_logo_sm.gif", :height => "30", :alt => "Google Groups", :width => "140" }
+    Sign up to the mailing list.
+    %form{:action => "http://groups.google.com/group/flapjack-project/boxsubscribe"}
+      Email:
+      %input{ :name => "email", :type => "text" }
+      %input{ :name => "sub", :type => "submit", :value => "Subscribe" }
+    %a{:href => "http://groups.google.com/group/flapjack-project/topics"}
+      View the archives.
+
+
 
 %div#who
   %h2 Who's reponsibile?
@@ -145,15 +152,19 @@
   %h2 Friends of Flapjack
   %ul
     %li
-      %a{:href => "http://reductivelabs.com/products/puppet/"}> Puppet
-      , configuration management & automated infrastructure.
-    %li
       %a{:href => "http://collectd.org/"}> collectd
       , the lightweight statistics collection daemon.
     %li
-      %a{:href => "http://auxesis.github.com/cucumber-nagios/"}> cucumber-nagios
+      %a{:href => "http://auxesis.github.com/visage/"}> Visage
+      , a web interface for viewing collectd statistics. 
+    %li
+      %a{:href => "http://cucumber-nagios.org/"}> cucumber-nagios
       , lets you describe how a website should work in plain text, and outputs whether it does in
       the Nagios plugin format.
+    %li
+      %a{:href => "http://reductivelabs.com/products/puppet/"}> Puppet
+      , configuration management & automated infrastructure.
+
 
 
 
