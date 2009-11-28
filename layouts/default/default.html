@@ -15,7 +15,8 @@
         <%= link_to home.title, home.path %>
         <%= link_to "Installing", "http://wiki.flapjack-project.com/installation_guides" %>
         <%= link_to "Using", "http://wiki.flapjack-project.com/usage_guides" %>
-        <%= link_to "Developing", "http://wiki.flapjack-project.com/development_guides" %>
+        <% dev = @pages.find {|p| p.path =~ /^\/devel/} %>
+        <%= link_to dev.title, dev.path %>
       </div>
     </div>
     <div id="content">
