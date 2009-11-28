@@ -107,7 +107,7 @@ code {
 }
 
 div#running li {
-  margin: 1.5em 0.5em;
+  margin: 0.5em;
   list-style-type: square;
   padding-left: 0.33em;
 }
@@ -158,4 +158,21 @@ h2.flapjack-admin {
 
 h2.beanstalkd, h2.distributing {
   color: #d7ffc8;
+}
+
+div#mailinglist {
+  background: white;
+  color: black;
+  width: 300px;
+  font-size: 16px;
+  padding: 16px;
+  margin-top: 20px;
+}
+
+div#mailinglist a {
+  color: #214b7a;
+}
+
+div#mailinglist img {
+  display: block;
 }
